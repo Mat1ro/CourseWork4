@@ -35,7 +35,7 @@ def register_extensions(app):
 
 
 #     create_data(app, db)
-#
+
 #
 # def create_data(app, db):
 #     with app.app_context():
