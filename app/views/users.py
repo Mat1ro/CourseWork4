@@ -5,7 +5,7 @@ from flask import request
 
 from app.helpers.decorations import auth_required
 
-user_ns = Namespace("users")
+user_ns = Namespace("user")
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)

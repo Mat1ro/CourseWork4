@@ -2,14 +2,13 @@ from flask import request
 from flask_restx import Namespace, Resource
 from app.container import auth_service
 from app.container import user_service
-from app.helpers.decorations import auth_required
 
 auth_ns = Namespace("auth")
 
 
-@auth_ns.route('/login')
+@auth_ns.route('/login/')
 class AuthView(Resource):
-    @auth_required
+
     def post(self):
         req_json = request.json
         if None in [req_json.get('email', None), req_json.get('password', None)]:
@@ -17,7 +16,6 @@ class AuthView(Resource):
         tokens = auth_service.generate_token(req_json.get('email'), req_json.get('password'))
         return tokens, 201
 
-    @auth_required
     def put(self):
         req_json = request.json
         refresh_token = req_json.get('refresh_token', None)
@@ -29,9 +27,9 @@ class AuthView(Resource):
         return tokens, 201
 
 
-@auth_ns.route('/register')
+@auth_ns.route('/register/')
 class AuthViewRegister(Resource):
-    @auth_required
+
     def post(self):
         req_json = request.json
         user_service.create(req_json)

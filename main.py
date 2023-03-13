@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_cors import CORS
 from flask_restx import Api
 
 from app.config import Config
@@ -43,7 +44,8 @@ def register_extensions(app):
 
 
 app = create_app(Config())
+CORS(app)
 
 if __name__ == '__main__':
     app.url_map.strict_slashes = False
-    app.run(host='0.0.0.0', port=3000)
+    app.run()
